@@ -11,7 +11,7 @@ spec:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: first-fightService
+            app: fightService
     template:
         metadata:
             labels:
@@ -19,7 +19,7 @@ spec:
         spec:
             containers:
                 - name: fightService
-                  image: workshop/first-service-jvm:1.1
+                  image: workshop/fightService:jvm:1.1
                   ports:
                       - name: http
                         containerPort: 8080
