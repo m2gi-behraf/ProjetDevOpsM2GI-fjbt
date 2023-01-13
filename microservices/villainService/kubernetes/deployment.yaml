@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: villainService
+    name: villain-service
     labels:
-        app: villainService
+        app: villain-service
 spec:
     replicas: 2
     strategy:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: villainService
+            app: villain-service
     template:
         metadata:
             labels:
-                app: villainService
+                app: villain-service
         spec:
             containers:
-                - name: villainService
-                  image: workshop/VillainService:latest
+                - name: villain-service
+                  image: workshop/villain-service:latest
                   ports:
                       - name: http
                         containerPort: 8080
