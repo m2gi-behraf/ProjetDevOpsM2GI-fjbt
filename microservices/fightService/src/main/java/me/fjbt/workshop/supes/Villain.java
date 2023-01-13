@@ -1,20 +1,13 @@
 package me.fjbt.workshop.supes;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import java.util.Random;
-
-@Entity
-public class Villain extends PanacheEntity {
+public class Villain {
 
     public String name;
     public String otherName;
     public int level;
     public String picture;
+    public Long id;
 
-    @Column(columnDefinition = "TEXT")
     public String powers;
 
     @Override
@@ -27,12 +20,5 @@ public class Villain extends PanacheEntity {
                 ", picture='" + picture + '\'' +
                 ", powers='" + powers + '\'' +
                 '}';
-    }
-
-    public Villain(String  name, String otherName, int level, String picture) {
-        this.name = name;
-        this.otherName = otherName;
-        this.level = level;
-        this.picture = picture;
     }
 }

@@ -10,29 +10,35 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 @RegisterRestClient(configKey = "hero-service")
 @Produces(MediaType.TEXT_PLAIN)
 public interface HeroServiceClient {
 
-    @Timeout(value = 2, unit = ChronoUnit.SECONDS) 
-    @Fallback(fallbackMethod = "getFallbackHero") 
-    
     @Path("/hero")
     @GET
     Hero getHero();
-
+    
     @Path("/heroes/random")
     @GET
     Hero findRandom();
-
+    
     @Path("/crash")
     @GET
     String crash();
-
+    
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS) 
+    @Fallback(fallbackMethod = "getFallbackHero") 
     @CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
     // A simple fallback
     default Hero getFallbackHero() {
-        return new Hero("Titi", "Titi  the majestuous bird", 2, "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/tweety.png");
+        final Hero hero = new Hero();
+        hero.name = "Titi";
+        hero.otherName = "Titi  the majestuous bird";
+        hero.level = 2;
+        hero.id = new Random().nextLong();
+        hero.picture = "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/tweety.png";
+        return hero;
     }
 }

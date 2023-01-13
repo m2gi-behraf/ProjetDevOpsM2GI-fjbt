@@ -1,22 +1,13 @@
 package me.fjbt.workshop.supes;
 
+public class Hero{
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import java.util.Random;
-
-
-@Entity
-public class Hero extends PanacheEntity {
-
+    public Long id;
     public String name;
     public String otherName;
     public int level;
     public String picture;
 
-    @Column(columnDefinition = "TEXT")
     public String powers;
 
     @Override
@@ -29,12 +20,5 @@ public class Hero extends PanacheEntity {
                 ", picture='" + picture + '\'' +
                 ", powers='" + powers + '\'' +
                 '}';
-    }
-
-    public Hero (String name, String otherName, int level, String picture){
-        this.name = name;
-        this.otherName = otherName;
-        this.level = level;
-        this.picture = picture;
     }
 }
