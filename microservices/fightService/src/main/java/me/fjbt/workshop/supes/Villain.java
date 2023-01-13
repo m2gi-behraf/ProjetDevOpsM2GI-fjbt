@@ -35,4 +35,11 @@ public class Villain extends PanacheEntity {
                 ", powers='" + powers + '\'' +
                 '}';
     }
+
+    public Villain(String  name, String otherName, int level, String picture) {
+        this.name = name;
+        this.otherName = otherName;
+        this.level = level;
+        this.picture = picture;
+    }
 }
