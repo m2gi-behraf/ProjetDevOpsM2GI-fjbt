@@ -1,7 +1,9 @@
 package me.fjbt.workshop.supes;
 
 import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.faulttolerance.exceptions.TimeoutException;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 
@@ -20,6 +22,13 @@ public interface VillainServiceClient {
     @GET
     Villain getVillain();
     
+    @Retry(retryOn = TimeoutException.class,
+            maxRetries = 4, maxDuration = 4,
+            durationUnit = ChronoUnit.SECONDS)
+    //@Timeout(value = 2, unit = ChronoUnit.SECONDS) 
+    @Timeout(value = 2000)
+    @Fallback(fallbackMethod = "getFallbackVillain")
+    //@CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
     @Path("/villains/random")
     @GET
     Villain findRandom();
@@ -28,10 +37,6 @@ public interface VillainServiceClient {
     @GET
     String crash();
     
-    @Timeout(value = 2, unit = ChronoUnit.SECONDS) 
-    @Fallback(fallbackMethod = "getFallbackVillain") // <---- Added
-    @CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
-    // A simple fallback
     default Villain getFallbackVillain() {
         final Villain villain = new Villain();
         villain.name = "Jad";
