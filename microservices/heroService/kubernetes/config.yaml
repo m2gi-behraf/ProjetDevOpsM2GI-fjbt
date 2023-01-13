@@ -2,6 +2,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: supes-config
+  name: hero-config
 data:
-  database: "jdbc:postgresql://supes-database:5432/supes"
+  database: "jdbc:postgresql://hero-database:5432/hero"

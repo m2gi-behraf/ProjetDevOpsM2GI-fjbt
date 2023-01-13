@@ -48,15 +48,15 @@ spec:
                       - name: QUARKUS_DATASOURCE_URL
                         valueFrom:
                             configMapKeyRef:
-                                name: supes-config
+                                name: villain-config
                                 key: database
                       - name: QUARKUS_DATASOURCE_USERNAME
                         valueFrom:
                             secretKeyRef:
-                                name: supes-hero-database-secret
+                                name: villain-database-secret
                                 key: username
                       - name: QUARKUS_DATASOURCE_PASSWORD
                         valueFrom:
                             secretKeyRef:
-                                name: supes-hero-database-secret
+                                name: villain-database-secret
                                 key: password
