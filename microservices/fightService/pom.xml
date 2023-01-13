@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.projetDevopsM2GI-fjbt.workshop</groupId>
+    <groupId>me.fjbt.workshop</groupId>
     <artifactId>fightService</artifactId>
     <version>1.0-SNAPSHOT</version>
 
