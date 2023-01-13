@@ -48,7 +48,7 @@ spec:
                       - name: QUARKUS_DATASOURCE_URL
                         valueFrom:
                             configMapKeyRef:
-                                name: hero-config
+                                name: supes-config
                                 key: database
                       - name: QUARKUS_DATASOURCE_USERNAME
                         valueFrom:
