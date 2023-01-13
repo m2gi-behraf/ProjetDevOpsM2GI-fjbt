@@ -18,7 +18,7 @@ spec:
                 app: hero-service
         spec:
             containers:
-                - name: heroService
+                - name: hero-service
                   image: workshop/hero-service:latest
                   ports:
                       - name: http
@@ -34,16 +34,16 @@ spec:
                       periodSeconds: 5
                       successThreshold: 1
                       timeoutSeconds: 2
-                      readinessProbe:
-                          failureThreshold: 3
-                          httpGet:
-                              path: /q/health/ready
-                              port: 8080
-                              scheme: HTTP
-                          initialDelaySeconds: 0
-                          periodSeconds: 30
-                          successThreshold: 1
-                          timeoutSeconds: 10
+                  readinessProbe:
+                      failureThreshold: 3
+                      httpGet:
+                          path: /q/health/ready
+                          port: 8080
+                          scheme: HTTP
+                      initialDelaySeconds: 0
+                      periodSeconds: 30
+                      successThreshold: 1
+                      timeoutSeconds: 10
                   env:
                       - name: QUARKUS_DATASOURCE_URL
                         valueFrom:
