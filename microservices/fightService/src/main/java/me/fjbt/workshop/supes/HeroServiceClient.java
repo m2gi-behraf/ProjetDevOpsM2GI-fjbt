@@ -11,16 +11,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.time.temporal.ChronoUnit;
 
-@RegisterRestClient(configKey = "villain-service")
+@RegisterRestClient(configKey = "hero-service")
 @Produces(MediaType.TEXT_PLAIN)
-public interface VillainServiceClient {
+public interface HeroServiceClient {
 
-    @Timeout(value = 2, unit = ChronoUnit.SECONDS) // <---- Added
-    @Fallback(fallbackMethod = "getFallbackVillain") // <---- Added
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS) 
+    @Fallback(fallbackMethod = "getFallbackHero") 
     
-    @Path("/villain")
+    @Path("/hero")
     @GET
-    Villain getVillain();
+    Hero getHero();
 
     @Path("/crash")
     @GET
@@ -28,7 +28,7 @@ public interface VillainServiceClient {
 
     @CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
     // A simple fallback
-    default Villain getFallbackVillain() {
-        return new Villain("Jad", "Jaddie the baddie", 1, "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/Jaddie%20the%20baddie.png");
+    default Hero getFallbackHero() {
+        return new Hero("Titi", "Titi  the majestuous bird", 2, "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/tweety.png");
     }
 }
