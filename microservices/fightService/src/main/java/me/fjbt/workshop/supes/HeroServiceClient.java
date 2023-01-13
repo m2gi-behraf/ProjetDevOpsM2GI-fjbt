@@ -22,6 +22,10 @@ public interface HeroServiceClient {
     @GET
     Hero getHero();
 
+    @Path("/heroes/random")
+    @GET
+    Hero findRandom();
+
     @Path("/crash")
     @GET
     String crash();

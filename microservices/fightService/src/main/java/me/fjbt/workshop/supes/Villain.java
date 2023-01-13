@@ -17,13 +17,6 @@ public class Villain extends PanacheEntity {
     @Column(columnDefinition = "TEXT")
     public String powers;
 
-    public static Villain findRandom() {
-        long countVillains = count();
-        Random random = new Random();
-        int randomVillain = random.nextInt((int) countVillains);
-        return findAll().page(randomVillain, 1).firstResult();
-    }
-
     @Override
     public String toString() {
         return "Villain{" +

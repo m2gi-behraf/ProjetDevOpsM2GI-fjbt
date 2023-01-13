@@ -22,6 +22,10 @@ public interface VillainServiceClient {
     @GET
     Villain getVillain();
 
+    @Path("/villains/random")
+    @GET
+    Villain findRandom();
+
     @Path("/crash")
     @GET
     String crash();

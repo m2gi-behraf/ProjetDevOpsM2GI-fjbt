@@ -1,7 +1,9 @@
 package me.fjbt.workshop.supes;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,10 +16,13 @@ public class FightResource {
 
     private static final Logger LOGGER = Logger.getLogger(FightResource.class);
 
+    @Inject @RestClient HeroServiceClient heroClient;
+    @Inject @RestClient VillainServiceClient villainClient;
+
     @GET
     @Path("/heroes/random")
     public Hero getRandomHero() {
-        Hero hero = Hero.findRandom();
+        Hero hero = heroClient.findRandom();
         LOGGER.debug("Found random hero " + hero);
         return hero;
     }
@@ -25,7 +30,7 @@ public class FightResource {
     @GET
     @Path("/villains/random")
     public Villain getRandomVillain() {
-        Villain villain = Villain.findRandom();
+        Villain villain = villainClient.findRandom();
         LOGGER.debug("Found random villain " + villain);
         return villain;
     }
