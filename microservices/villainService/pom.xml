@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.fjbt.workshop</groupId>
-    <artifactId>vilainService</artifactId>
+    <artifactId>villain-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
