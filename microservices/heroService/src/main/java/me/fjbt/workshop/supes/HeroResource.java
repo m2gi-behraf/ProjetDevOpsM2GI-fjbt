@@ -1,4 +1,4 @@
-package me.escoffier.workshop.supes;
+package me.fjbt.workshop.supes;
 
 import org.jboss.logging.Logger;
 
