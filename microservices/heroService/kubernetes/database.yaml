@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: supes-database
+      app: hero-database
   template:
     metadata:
       labels:
-        app: supes-database
+        app: hero-database
     spec:
       containers:
         - name: postgres
@@ -19,19 +19,19 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: supes
+              value: hero
             - name: POSTGRES_USER
-              value: supes
+              value: hero
             - name: POSTGRES_PASSWORD
-              value: supes
+              value: hero
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: supes-database
+  name: hero-database
 spec:
   ports:
     - port: 5432
   selector:
-    app: supes-database
+    app: hero-database
