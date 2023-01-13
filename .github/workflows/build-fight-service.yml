@@ -21,7 +21,7 @@ jobs:
       - name: Build with Maven
         run: |
           mvn -f microservices/fightService/pom.xml -B clean package
-          docker build -f microservices/fightService/src/main/docker/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/fight-service .
+          docker build -f microservices/fightService/src/main/docker/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/fight-service microservices/fightService/.
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -29,4 +29,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push To Docker
         run: |
-          docker push <username>/fight-service:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/fight-service:latest
