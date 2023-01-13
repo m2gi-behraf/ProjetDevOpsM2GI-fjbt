@@ -29,4 +29,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push To Docker
         run: |
-          docker push <username>/fight-service:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/fight-service:latest
