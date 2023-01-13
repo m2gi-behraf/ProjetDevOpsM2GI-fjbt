@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: fightService
+    name: fight-service
     labels:
-        app: fightService
+        app: fight-service
 spec:
     replicas: 2
     strategy:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: first-fightService
+            app: fight-service
     template:
         metadata:
             labels:
-                app: fightService
+                app: fight-service
         spec:
             containers:
-                - name: fightService
-                  image: workshop/first-service-jvm:1.1
+                - name: fight-service
+                  image: workshop/fight-service:jvm:1.1
                   ports:
                       - name: http
                         containerPort: 8080

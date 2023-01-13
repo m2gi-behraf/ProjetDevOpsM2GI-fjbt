@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: heroService
+    name: hero-service
     labels:
-        app: heroService
+        app: hero-service
 spec:
     replicas: 2
     strategy:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: heroService
+            app: hero-service
     template:
         metadata:
             labels:
-                app: heroService
+                app: hero-service
         spec:
             containers:
                 - name: heroService
-                  image: workshop/heroService:latest
+                  image: workshop/hero-service:latest
                   ports:
                       - name: http
                         containerPort: 8080

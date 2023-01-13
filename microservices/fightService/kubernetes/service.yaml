@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: fightService
+    name: fight-service
 spec:
     type: LoadBalancer
     selector:
-        app: fightService
+        app: fight-service
     ports:
         - port: 8080
           targetPort: http
