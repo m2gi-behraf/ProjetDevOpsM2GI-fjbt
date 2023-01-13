@@ -37,4 +37,13 @@ public class Hero extends PanacheEntity {
                 ", powers='" + powers + '\'' +
                 '}';
     }
+
+    public Hero (String name, String otherName, int level, String picture){
+        this.name = name;
+        this.otherName = otherName;
+        this.level = level;
+        this.picture = picture;
+    }
+
+    public Hero() {}
 }
