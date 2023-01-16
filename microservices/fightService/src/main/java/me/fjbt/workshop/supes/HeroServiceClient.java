@@ -1,9 +1,7 @@
 package me.fjbt.workshop.supes;
 
 import org.eclipse.microprofile.faulttolerance.Fallback;
-import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
-import org.eclipse.microprofile.faulttolerance.exceptions.TimeoutException;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 
@@ -11,31 +9,18 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 @RegisterRestClient(configKey = "hero-service")
-@Produces(MediaType.TEXT_PLAIN)
+@Produces(MediaType.APPLICATION_JSON)
 public interface HeroServiceClient {
-
-    @Path("/hero")
-    @GET
-    Hero getHero();
     
-    //@CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
-    @Retry(retryOn = TimeoutException.class,
-            maxRetries = 4, maxDuration = 4,
-            durationUnit = ChronoUnit.SECONDS)
-    //@Timeout(value = 2, unit = ChronoUnit.SECONDS) 
-    @Timeout(value = 2000)
+    @CircuitBreaker(successThreshold = 10, requestVolumeThreshold = 4, failureRatio=0.75,delay = 1000)
+    @Timeout(value = 500)
     @Fallback(fallbackMethod = "getFallbackHero") 
     @Path("/heroes/random")
     @GET
     Hero findRandom();
-    
-    @Path("/crash")
-    @GET
-    String crash();
     
     default Hero getFallbackHero() {
         final Hero hero = new Hero();
@@ -43,7 +28,7 @@ public interface HeroServiceClient {
         hero.otherName = "Titi  the majestuous bird";
         hero.level = 2;
         hero.id = new Random().nextLong();
-        hero.picture = "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/tweety.png";
+        hero.picture = "https://github.com/m2gi-behraf/ProjetDevOpsM2GI-fjbt/blob/main/microservices/fightService/src/main/resources/images/tweety.jpg?raw=true";
         return hero;
     }
 }
