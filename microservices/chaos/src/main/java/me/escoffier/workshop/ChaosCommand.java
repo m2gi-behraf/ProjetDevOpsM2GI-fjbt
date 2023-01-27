@@ -30,6 +30,11 @@ public class ChaosCommand implements Runnable {
             logger.infof("Pod %s - %s", pod.getMetadata().getName(), pod.getStatus().getPhase());
             for (OwnerReference reference : pod.getMetadata().getOwnerReferences()) {
                 logger.infof("\t Owner: %s (%s)", reference.getName(), reference.getKind());
+                if (reference.getName().contains(deployment)) {
+                    logger.infof("Deleting pod %s", pod.getMetadata().getName());
+                    kubernetes.pods().withName(pod.getMetadata().getName()).delete();
+                    return;
+                }
             }
         }
 
@@ -37,6 +42,8 @@ public class ChaosCommand implements Runnable {
         for (Deployment dep : deployments) {
             logger.infof("Deployment %s", dep.getMetadata().getName());
         }
+
+        System.out.println("deployment = " + deployment);
 
     }
 
